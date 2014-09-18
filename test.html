@@ -511,48 +511,48 @@
         </tbody>
     </table>
 
-		<script type="text/javascript" src="test/DataTables-1.10.2/media/js/jquery.js"></script>
-		<script type="text/javascript" src="test/DataTables-1.10.2/media/js/jquery.dataTables.min.js"></script>
-		<script type="text/javascript" language="javascript" src="test/DataTables-1.10.2/extensions/TableTools/js/dataTables.tableTools.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				/*jslint browser: true*/ /*global  $*/
-                "use strict";
-                // GENERATE TOGGLE LINKS
-                //-->GET TABLE HEADERS
-                var tableHeaders = [];
-                $('.example thead tr th').each(function(index) { 
-                    tableHeaders.push('<a class="toggle-vis" data-column="' + index + '">' + $(this).text() + '</a>'); 
-                });
+<script type="text/javascript" src="test/DataTables-1.10.2/media/js/jquery.js"></script>
+<script type="text/javascript" src="test/DataTables-1.10.2/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="test/DataTables-1.10.2/extensions/TableTools/js/dataTables.tableTools.js"></script>
+<script type="text/javascript">
+/*jslint browser: true*/
+/*global  $*/
+$(document).ready(function () {
+    'use strict';
 
-                //-->GENERATE THE LINKS
-                $('.toggles').html(tableHeaders);
+    // GENERATE TOGGLE LINKS
+    //-->GET TABLE HEADERS
+    var tableHeaders = [], table;
+    $('.example thead tr th').each(function (index) {
+        tableHeaders.push('<a class="toggle-vis" data-column="' + index + '">' + $(this).text() + '</a>');
+    });
 
-                var table = $('.example').DataTable({
-                    dom: 'T<"clear">lfrtip',
-                    "tableTools": {
-                        "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf",
-                        "aButtons": [
-                            {
-                                "sExtends": "csv",
-                                "sButtonText": "Export as CSV",
-                                "mColumns": "visible"
-                            }
-                        ]
-                    },
-                    stateSave: true
-                });
+    //-->GENERATE THE LINKS
+    $('.toggles').html(tableHeaders);
 
-                $('a.toggle-vis').on( 'click', function (e) {
-                    e.preventDefault();
+    table = $('.example').DataTable({
+        dom: 'T<"clear">lfrtip',
+        "tableTools": {
+            "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf",
+            "aButtons": [{
+                "sExtends": "csv",
+                "sButtonText": "Export as CSV",
+                "mColumns": "visible"
+            }]
+        },
+        stateSave: true
+    });
 
-                    // Get the column API object
-                    var column = table.column( $(this).attr('data-column') );
+    $('a.toggle-vis').on('click', function (e) {
+        e.preventDefault();
 
-                    // Toggle the visibility
-                    column.visible( !column.visible() );
-                });
-            });
-		</script>
+        // Get the column API object
+        var column = table.column($(this).attr('data-column'));
+
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
+});
+</script>
 	</body>
 </html>
