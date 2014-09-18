@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="test/DataTables-1.10.2/media/css/jquery.dataTables.min.css">
-		<link rel="stylesheet" type="text/css" href="test/DataTables-1.10.2/extensions/tabletools/css/dataTables.tableTools.css">
+		<link rel="stylesheet" type="text/css" href="test/DataTables-1.10.2/extensions/TableTools/css/dataTables.tableTools.css">
 		<style>
 			a {
 			    cursor: pointer;
@@ -505,7 +505,7 @@
 
 		<script type="text/javascript" src="test/DataTables-1.10.2/media/js/jquery.js"></script>
 		<script type="text/javascript" src="test/DataTables-1.10.2/media/js/jquery.dataTables.min.js"></script>
-		<script type="text/javascript" language="javascript" src="test/DataTables-1.10.2/extensions/tabletools/js/dataTables.tableTools.js"></script>
+		<script type="text/javascript" language="javascript" src="test/DataTables-1.10.2/extensions/TableTools/js/dataTables.tableTools.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 			    var table = $('#example').DataTable( {
