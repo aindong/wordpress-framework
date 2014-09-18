@@ -12,15 +12,23 @@
 			a:hover {
 			    text-decoration: underline;
 			}
+
+			a.toggle-vis {
+				margin: 0 10px;
+			}
 		</style>
 	</head>
 	<body>
 		
 		<div>
-					Toggle column: <a class="toggle-vis" data-column="0">Name</a> - <a class="toggle-vis" data-column="1">Position</a> - <a class="toggle-vis" data-column="2">Office</a> - <a class="toggle-vis" data-column="3">Age</a> - <a class="toggle-vis" data-column="4">Start date</a> - <a class="toggle-vis" data-column="5">Salary</a>
-				</div>
+			Hide Columns: 
+			<div class="toggles">
+			
+			</div>
+		</div>
+		
 
-<table id="example" class="display" cellspacing="0" width="100%">
+<table id="example" class="display example" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -508,31 +516,43 @@
 		<script type="text/javascript" language="javascript" src="test/DataTables-1.10.2/extensions/TableTools/js/dataTables.tableTools.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-			    var table = $('#example').DataTable( {
-			        dom: 'T<"clear">lfrtip',
-			        "tableTools": {
-			            "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf",
-			            "aButtons": [
-			                {
-			                    "sExtends": "csv",
-			                    "sButtonText": "Export as CSV",
-			                    "mColumns": "visible"
-			                }
-			            ]
-			        },
-			        stateSave: true
-			    } );
-			    
-			    $('a.toggle-vis').on( 'click', function (e) {
-			        e.preventDefault();
-			 
-			        // Get the column API object
-			        var column = table.column( $(this).attr('data-column') );
-			 
-			        // Toggle the visibility
-			        column.visible( ! column.visible() );
-			    } );
-			});
+				/*jslint browser: true*/ /*global  $*/
+                "use strict";
+                // GENERATE TOGGLE LINKS
+                //-->GET TABLE HEADERS
+                var tableHeaders = [];
+                $('.example thead tr th').each(function(index) { 
+                    tableHeaders.push('<a class="toggle-vis" data-column="' + index + '">' + $(this).text() + '</a>'); 
+                });
+
+                //-->GENERATE THE LINKS
+                $('.toggles').html(tableHeaders);
+
+                var table = $('.example').DataTable({
+                    dom: 'T<"clear">lfrtip',
+                    "tableTools": {
+                        "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf",
+                        "aButtons": [
+                            {
+                                "sExtends": "csv",
+                                "sButtonText": "Export as CSV",
+                                "mColumns": "visible"
+                            }
+                        ]
+                    },
+                    stateSave: true
+                });
+
+                $('a.toggle-vis').on( 'click', function (e) {
+                    e.preventDefault();
+
+                    // Get the column API object
+                    var column = table.column( $(this).attr('data-column') );
+
+                    // Toggle the visibility
+                    column.visible( !column.visible() );
+                });
+            });
 		</script>
 	</body>
 </html>
