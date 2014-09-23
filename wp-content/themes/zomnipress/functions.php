@@ -75,6 +75,11 @@ if( !function_exists( 'alpha_setup' ) ) {
 		add_theme_support( 'post-thumbnails' );
 
 		/**
+		 * Add support for woocommerce
+		 */
+		add_theme_support( 'woocommerce' );
+
+		/**
 		 * Register nav menu
 		 */
 		register_nav_menus();
@@ -139,4 +144,65 @@ if( !function_exists('alpha_post_meta') ) {
 			
 		}
 	}
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * 6.0 - Display navigation to the next/previous set of post
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+if( !function_exists('alpha_paging_nav') ) {
+	function alpha_paging_nav() {
+		echo '<ul>';
+		if( get_previous_posts_link() ) {
+			echo '<li class="next">' . previous_posts_link( __('New Posts  &rarr;', 'alpha') ) . '</li>';
+		}
+
+		if( get_next_posts_link() ) {
+			echo '<li class="previous">' . next_posts_link( __('&larr; Older Posts', 'alpha') ) . '</li>';
+		}
+		echo '</ul>';
+	}
+}
+
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * 7.0 - Include the master css file in the header
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+if(!function_exists( 'alpha_load_wp_head' ) ) {
+	function alpha_load_wp_head() {
+		// Get the 
+	}
+
+	add_action( 'wp_head', 'alpha_load_wp_head' );
+}
+
+/**
+ * -------------------------------------------------------------------------------------------------------------------
+ * 8.0 - Load the custom scripts for the theme
+ * -------------------------------------------------------------------------------------------------------------------
+ */
+
+if(!function_exists( 'alpha_scripts' ) ) {
+	function alpha_scripts() {
+		// Add support for pages with threaded comments
+		if( is_singular() && comments_open() && get_option('thread_comments') ) {
+			wp_enqueue_script( 'comment-reply' );
+		}
+
+		// register scripts here
+		wp_register_script( 'alpha-custom-js', THEMEROOT . '/assets/js/script.js', array('jquery'), false, true );
+
+		// load the scripts
+		wp_enqueue_script( 'alpha-custom-js' );
+
+		// load the stylesheets
+		wp_enqueue_style( 'master-css', THEMEROOT . '/assets/css/master.css');
+	}
+
+	add_action( 'wp_enqueue_scripts', 'alpha_scripts' );
 }

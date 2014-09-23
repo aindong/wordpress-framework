@@ -1,21 +1,14 @@
 <?php
 /**
- * content.php
+ * content-image.php
  * 
- * The default file that will display content
+ * The default file that will display image content
  */
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class() ?>>
 	<!-- START: ENTRY HEADER -->
 	<header class="entry-header">
-		<!-- FOR SHOWING THUMBNAILS -->
-		<?php if( has_post_thumbnail() && !post_password_required() ) : ?>
-			<figure class="entry-thumbnail">
-				<?php the_post_thumbnail() ?>
-			</figure>
-		<?php endif; ?>
-
 		<!-- TITLE FOR THE POST -->
 		<?php if( is_single() ) : ?>
 			<h1><?php the_title(); ?></h1>
@@ -34,14 +27,10 @@
 
 	<!-- START: ARTICLE CONTENT -->
 	<div class="entry-content">
-		<?php if( is_search() ) : ?>
-			<?php the_excerpt(); ?>
-		<?php else : ?>
-			<?php the_content( __('Continue Reading &rarr;', 'alpha') ); ?>
-			
-			<!-- START: DISPLAY PAGINATION -->
-			<?php wp_link_pages(); ?>
-		<?php endif; ?>
+		<?php the_content( __('Continue Reading &rarr;', 'alpha') ); ?>
+		
+		<!-- START: DISPLAY PAGINATION -->
+		<?php wp_link_pages(); ?>
 	</div>
 	<!-- END: ARTICLE CONTENT -->
 
